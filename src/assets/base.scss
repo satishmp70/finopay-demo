@@ -1,0 +1,250 @@
+/* src/assets/styles/base.scss */
+@use './styles/variables' as *;
+@use './styles/mixins' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  background-color: #f9fafb;
+}
+
+// Sidebar and Card Styles (shared)
+.transfer-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar-box {
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+}
+
+.sidebar-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.quick-transfer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quick-transfer-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 1px 2px 0 rgba(16, 30, 54, 0.04);
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+  cursor: pointer;
+  min-height: 72px;
+
+  &:hover {
+    background-color: #f3f4f6;
+    box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.08);
+    border-color: #c7d2fe;
+  }
+}
+
+.quick-transfer-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.quick-transfer-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+.quick-transfer-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 0.1rem;
+}
+.quick-transfer-mobile {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.quick-avatar-blue {
+  background-color: #dbeafe;
+}
+.quick-text-blue {
+  color: #2563eb;
+}
+.quick-avatar-green {
+  background-color: #dcfce7;
+}
+.quick-text-green {
+  color: #16a34a;
+}
+.quick-avatar-purple {
+  background-color: #f3e8ff;
+}
+.quick-text-purple {
+  color: #9333ea;
+}
+
+.recent-transfers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.recent-transfer-item {
+  background-color: #f9fafb;
+}
+.recent-transfer-left {
+  display: flex;
+  align-items: center;
+}
+.recent-transfer-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+.icon-bg-green {
+  background-color: #dcfce7;
+}
+.icon-color-green {
+  color: #16a34a;
+}
+.icon-bg-blue {
+  background-color: #dbeafe;
+}
+.icon-color-blue {
+  color: #2563eb;
+}
+.icon-bg-orange {
+  background-color: #fed7aa;
+}
+.icon-color-orange {
+  color: #ea580c;
+}
+.recent-transfer-svg {
+  width: 1rem;
+  height: 1rem;
+}
+.recent-transfer-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+}
+.recent-transfer-time {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+.recent-transfer-right {
+  text-align: right;
+}
+.recent-transfer-amount {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+}
+.recent-transfer-status {
+  font-size: 0.75rem;
+}
+.status-success {
+  color: #16a34a;
+}
+.status-pending {
+  color: #ca8a04;
+}
+
+.transfer-limits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.transfer-limit-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.transfer-limit-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+.transfer-limit-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+}
+.transfer-limit-remaining {
+  color: #16a34a;
+}
+.transfer-limit-bar {
+  width: 100%;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  height: 0.5rem;
+  margin-top: 0.5rem;
+}
+.transfer-limit-progress {
+  background-color: #3b82f6;
+  height: 0.5rem;
+  border-radius: 9999px;
+}
+.support-desc {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+.support-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.support-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background: none;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: #f9fafb;
+  }
+}
+.support-btn-icon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
