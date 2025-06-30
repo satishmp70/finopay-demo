@@ -25,16 +25,33 @@
             <input
               id="password"
               v-model="password"
-              type="password"
+              :type="isPasswordVisible ? 'text' : 'password'"
               placeholder="Enter your password"
               required
             />
-            <span class="icon-eye"></span>
+            <span class="password-toggle-icon" @click="togglePasswordVisibility">
+              <svg v-if="isPasswordVisible" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                <path
+                  fill="#6c63ff"
+                  fill-rule="evenodd"
+                  d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Zm0 13a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Zm0-8a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <svg v-else width="20" height="20" fill="none" viewBox="0 0 24 24">
+                <path
+                  fill="#6c63ff"
+                  fill-rule="evenodd"
+                  d="M12 4.5c-2.43 0-4.72.78-6.66 2.19l1.73 1.73A8.45 8.45 0 0 1 12 6.5a8.45 8.45 0 0 1 8.2 6.34l1.96 1.96C23.23 13.56 24 12 24 12c-1.73-4.39-6-7.5-12-7.5Zm-9.84.97L1 6.63l2.87 2.87A11.3 11.3 0 0 0 1 12c1.73 4.39 6 7.5 11 7.5 1.99 0 3.86-.51 5.53-1.39l2.84 2.84 1.16-1.16-20.7-20.7-1.16 1.16ZM12 17.5a5.5 5.5 0 0 1-5.35-4.66L15.16 4.34A5.5 5.5 0 0 1 12 17.5Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>
           </div>
         </div>
         <div class="form-row">
           <label class="checkbox-label"> <input type="checkbox" /> Remember me </label>
-          <a href="#" class="forgot-link">Forgot Password?</a>
+          <router-link to="/forgot-password" class="forgot-link">Forgot Password?</router-link>
         </div>
         <div class="security-notice">
           <span class="icon-info"></span>
@@ -46,7 +63,7 @@
           <span v-else>LOGIN</span>
         </button>
         <div class="signup-row">
-          Don't have an Account? <a href="#" class="signup-link">Sign Up</a>
+          Don't have an Account? <router-link to="/signup" class="signup-link">Sign Up</router-link>
         </div>
       </form>
     </div>
@@ -66,6 +83,11 @@ const toast = useToast()
 const username = ref('')
 const password = ref('')
 const loading = ref(false)
+const isPasswordVisible = ref(false)
+
+function togglePasswordVisibility() {
+  isPasswordVisible.value = !isPasswordVisible.value
+}
 
 function onLogin() {
   loading.value = true
@@ -176,14 +198,19 @@ body {
   gap: 6px;
 }
 .form-group input {
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #e0e0e0;
+  padding: 14px 40px 14px 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
   font-size: 1rem;
   color: #22223b;
-  background: #f5f7fa;
+  background: #f0f5ff;
   width: 100%;
   box-sizing: border-box;
+  transition: box-shadow 0.2s;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.5);
+  }
 }
 .form-group input::placeholder {
   color: #a0a4b8;
@@ -194,13 +221,14 @@ body {
   display: flex;
   align-items: center;
 }
-.input-password-row .icon-eye {
+.password-toggle-icon {
   position: absolute;
-  right: 12px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #bdbdbd;
+  display: flex;
+  align-items: center;
 }
 .form-row {
   display: flex;

@@ -11,3 +11,16 @@
   padding: 0;
   cursor: pointer;
 }
+
+// Responsive breakpoints
+@mixin sm {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}

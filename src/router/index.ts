@@ -5,6 +5,8 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import LoginPage from '@/pages/login/LoginPage.vue'
 import NotFound from '@/pages/not-found.vue'
 import HomePage from '@/pages/HomePage.vue'
+import SignupPage from '@/pages/SignupPage.vue'
+import ForgotPasswordPage from '@/pages/ForgotPasswordPage.vue'
 
 // Lazy-loaded views
 const AdminDashboard = () => import('@/pages/admin/AdminDashboard.vue')
@@ -20,6 +22,8 @@ const UserAnalytics = () => import('@/pages/user/AnalyticsPage.vue')
 const routes = [
   { path: '/login', component: LoginPage },
   { path: '/', component: HomePage },
+  { path: '/signup', component: SignupPage },
+  { path: '/forgot-password', component: ForgotPasswordPage },
   {
     path: '/admin',
     component: DefaultLayout,

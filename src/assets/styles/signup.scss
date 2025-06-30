@@ -1,0 +1,191 @@
+// Signup Page Styles (BEM)
+@import './variables.scss';
+@import './mixins.scss';
+
+.signup-section {
+  background: #f9fafb;
+  min-height: 100vh;
+  padding: 5rem 0;
+
+  &__container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+    @include sm {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__brand {
+    color: #9333ea;
+  }
+
+  &__divider {
+    width: 6rem;
+    height: 0.25rem;
+    background: linear-gradient(to right, #9333ea, #ec4899);
+    margin: 0 auto 1.5rem auto;
+    border-radius: 1rem;
+  }
+
+  &__subtitle {
+    font-size: 1.125rem;
+    color: #6b7280;
+    max-width: 32rem;
+    margin: 0 auto;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    @include lg {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+
+  &__info-card {
+    background: linear-gradient(135deg, #9333ea, #ec4899, #f43f5e);
+    color: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(80, 0, 80, 0.12);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  &__icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  &__info-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  &__info-desc {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  &__form-card {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(80, 0, 80, 0.08);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  &__form-title {
+    color: #9333ea;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+
+  &__form-welcome {
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-align: center;
+    color: #1f2937;
+  }
+
+  &__form-desc {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.signup-form__step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.signup-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.signup-form__label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: #374151;
+}
+
+.signup-form__input,
+.signup-form__select {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #1f2937;
+  transition: border 0.2s;
+  &:focus {
+    border-color: #9333ea;
+    outline: none;
+  }
+}
+
+.signup-form__button {
+  width: 100%;
+  padding: 0.7rem 0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+  &--primary {
+    background: linear-gradient(to right, #9333ea, #ec4899);
+    color: #fff;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+  &--secondary {
+    background: #fff;
+    color: #6b7280;
+    border: 1px solid #d1d5db;
+    &:hover {
+      background: #f3f4f6;
+    }
+  }
+}
+
+.signup-form__actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.signup-form__summary {
+  background: #f3f4f6;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  color: #374151;
+  margin-bottom: 1rem;
+}
