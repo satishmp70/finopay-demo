@@ -1,73 +1,98 @@
 <!-- src/pages/login/LoginPage.vue -->
 <template>
-  <div class="login-bg">
-    <div class="login-header">
-      <div class="login-logo-icon">F</div>
-      <span class="login-logo-title">finopay</span>
+  <div class="login-page">
+    <div class="login-logo-box">F</div>
+    <div class="login-brand">
+      <span class="login-brand__main">fino</span><span class="login-brand__accent">pay</span>
     </div>
     <h1 class="login-title">Welcome Back</h1>
     <p class="login-subtitle">Please login to your account</p>
-    <div class="login-form-card">
+    <div class="login-card">
+      <div class="login-card__accent"></div>
       <form class="login-form" @submit.prevent="onLogin">
-        <div class="form-group">
-          <label for="username"><span class="icon-user"></span> Username</label>
+        <div class="login-form__group">
+          <label for="username" class="login-form__label">
+            <span class="login-form__icon">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                <path
+                  fill="#bdbdbd"
+                  d="M12 12c2.7 0 8 1.34 8 4v2H4v-2c0-2.66 5.3-4 8-4Zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"
+                />
+              </svg>
+            </span>
+            Username
+          </label>
           <input
             id="username"
             v-model="username"
             type="text"
-            placeholder="Enter your username"
+            class="login-form__input"
+            placeholder="admin@finopay.com"
             required
           />
         </div>
-        <div class="form-group">
-          <label for="password"><span class="icon-lock"></span> Password</label>
-          <div class="input-password-row">
+        <div class="login-form__group">
+          <label for="password" class="login-form__label">
+            <span class="login-form__icon">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                <path
+                  fill="#bdbdbd"
+                  d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6-7V8a6 6 0 1 0-12 0v2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2Zm-8-2a4 4 0 1 1 8 0v2H6V8Zm10 10H6v-6h12v6Z"
+                />
+              </svg>
+            </span>
+            Password
+          </label>
+          <div class="login-form__input-wrapper">
             <input
               id="password"
               v-model="password"
               :type="isPasswordVisible ? 'text' : 'password'"
-              placeholder="Enter your password"
+              class="login-form__input"
+              placeholder="Password"
               required
             />
             <span class="password-toggle-icon" @click="togglePasswordVisibility">
-              <svg v-if="isPasswordVisible" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                <path
-                  fill="#6c63ff"
-                  fill-rule="evenodd"
-                  d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Zm0 13a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Zm0-8a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <svg v-else width="20" height="20" fill="none" viewBox="0 0 24 24">
-                <path
-                  fill="#6c63ff"
-                  fill-rule="evenodd"
-                  d="M12 4.5c-2.43 0-4.72.78-6.66 2.19l1.73 1.73A8.45 8.45 0 0 1 12 6.5a8.45 8.45 0 0 1 8.2 6.34l1.96 1.96C23.23 13.56 24 12 24 12c-1.73-4.39-6-7.5-12-7.5Zm-9.84.97L1 6.63l2.87 2.87A11.3 11.3 0 0 0 1 12c1.73 4.39 6 7.5 11 7.5 1.99 0 3.86-.51 5.53-1.39l2.84 2.84 1.16-1.16-20.7-20.7-1.16 1.16ZM12 17.5a5.5 5.5 0 0 1-5.35-4.66L15.16 4.34A5.5 5.5 0 0 1 12 17.5Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+              <i v-if="isPasswordVisible" class="fa-regular fa-eye"></i>
+              <i v-else class="fa-regular fa-eye-slash"></i>
             </span>
           </div>
         </div>
-        <div class="form-row">
-          <label class="checkbox-label"> <input type="checkbox" /> Remember me </label>
-          <router-link to="/forgot-password" class="forgot-link">Forgot Password?</router-link>
+        <div class="login-form__row">
+          <label class="login-form__checkbox"> <input type="checkbox" /> Remember me </label>
+          <router-link to="/forgot-password" class="login-form__forgot"
+            >Forgot Password?</router-link
+          >
         </div>
-        <div class="security-notice">
-          <span class="icon-info"></span>
+        <div class="login-form__info">
+          <span class="login-form__info-icon">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+              <path
+                fill="#3f51b5"
+                d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-2h2v2Zm0-4h-2V7h2v6Z"
+              />
+            </svg>
+          </span>
           Do not share login OTP &amp; Password with anyone. We will never ask you these details.
         </div>
-        <button type="submit" class="login-btn" :disabled="loading">
-          <span class="icon-login"></span>
-          <span v-if="loading">Logging in...</span>
-          <span v-else>LOGIN</span>
+        <button type="submit" class="login-form__button">
+          <span class="login-form__button-icon">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+              <path
+                fill="#fff"
+                d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6-7V8a6 6 0 1 0-12 0v2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2Zm-8-2a4 4 0 1 1 8 0v2H6V8Zm10 10H6v-6h12v6Z"
+              />
+            </svg>
+          </span>
+          LOGIN
         </button>
-        <div class="signup-row">
-          Don't have an Account? <router-link to="/signup" class="signup-link">Sign Up</router-link>
-        </div>
       </form>
+      <div class="login-form__signup-row">
+        Don't have an Account?
+        <router-link to="/signup" class="login-form__signup-link">Sign Up</router-link>
+      </div>
     </div>
-    <div class="login-footer">Contact Us</div>
+    <!-- <div class="login-contact">Contact Us</div> -->
   </div>
 </template>
 
@@ -107,37 +132,27 @@ function onLogin() {
 </script>
 
 <style scoped lang="scss">
-html,
-body {
-  height: 100%;
-  width: 100vw;
+:global(html),
+:global(body) {
   overflow: hidden !important;
-  margin: 0;
-  padding: 0;
+  height: 100vh;
 }
-.login-bg {
+.login-page {
   min-height: 100vh;
-  width: 100vw;
-  background: #f7f8fa;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background: #fcfaff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0;
-  overflow: hidden;
-  box-sizing: border-box;
+  padding: 2.5rem 0 1.5rem 0;
 }
-.login-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
-  margin-top: 24px;
-}
-.login-logo-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, #6c63ff 0%, #a445b2 100%);
+.login-logo-box {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #9333ea 0%, #6d28d9 100%);
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -145,13 +160,21 @@ body {
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
+  margin-bottom: 1.2rem;
   box-shadow: 0 2px 12px 0 rgba(108, 99, 255, 0.1);
 }
-.login-logo-title {
+.login-brand {
   font-size: 2rem;
   font-weight: 800;
   color: #22223b;
   letter-spacing: 0.01em;
+  margin-bottom: 0.5rem;
+  &__main {
+    color: #22223b;
+  }
+  &__accent {
+    color: #9333ea;
+  }
 }
 .login-title {
   font-size: 2.2rem;
@@ -166,7 +189,7 @@ body {
   text-align: center;
   margin-bottom: 24px;
 }
-.login-form-card {
+.login-card {
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
@@ -176,20 +199,32 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  margin-bottom: 2rem;
+}
+.login-card__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #9333ea 0%, #6d28d9 100%);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
 }
 .login-form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
-.form-group {
+.login-form__group {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 8px;
 }
-.form-group label {
+.login-form__label {
   font-size: 1rem;
   color: #22223b;
   font-weight: 600;
@@ -197,29 +232,30 @@ body {
   align-items: center;
   gap: 6px;
 }
-.form-group input {
-  padding: 14px 40px 14px 16px;
+.login-form__icon {
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
+}
+.login-form__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.login-form__input {
+  padding: 14px 40px 14px 40px;
   border-radius: 12px;
-  border: 1px solid transparent;
+  border: 1px solid #e0e0e0;
   font-size: 1rem;
   color: #22223b;
-  background: #f0f5ff;
+  background: #f5f7fa;
   width: 100%;
   box-sizing: border-box;
   transition: box-shadow 0.2s;
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.5);
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.15);
   }
-}
-.form-group input::placeholder {
-  color: #a0a4b8;
-  opacity: 1;
-}
-.input-password-row {
-  position: relative;
-  display: flex;
-  align-items: center;
 }
 .password-toggle-icon {
   position: absolute;
@@ -230,154 +266,84 @@ body {
   display: flex;
   align-items: center;
 }
-.form-row {
+.login-form__row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2px;
+  margin-bottom: 0.5rem;
 }
-.checkbox-label {
+.login-form__checkbox {
   display: flex;
   align-items: center;
-  gap: 8px;
+  font-size: 1rem;
   color: #22223b;
-  font-size: 0.98rem;
-}
-.checkbox-label input[type='checkbox'] {
-  width: 16px;
-  height: 16px;
-  accent-color: #a445b2;
-}
-.forgot-link {
-  color: #a445b2;
-  text-decoration: none;
-  font-size: 0.98rem;
   font-weight: 500;
-  transition: color 0.2s;
+  gap: 6px;
 }
-.forgot-link:hover {
-  color: #6c63ff;
+.login-form__forgot {
+  color: #9333ea;
+  font-weight: 600;
+  text-decoration: underline;
+  font-size: 1rem;
+  cursor: pointer;
 }
-.security-notice {
+.login-form__info {
+  background: #eaf1ff;
   color: #3f51b5;
-  background: #f3f7fd;
-  font-size: 0.93rem;
   border-radius: 8px;
-  padding: 10px 12px;
-  margin: 10px 0 0 0;
-  text-align: left;
+  padding: 12px 16px;
+  font-size: 1rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
+  margin-bottom: 0.5rem;
 }
-.login-btn {
+.login-form__info-icon {
+  margin-top: 2px;
+}
+.login-form__button {
   width: 100%;
-  padding: 13px 0;
-  background: linear-gradient(90deg, #a445b2 0%, #6c63ff 100%);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.08rem;
+  padding: 0.9rem 0;
+  border-radius: 12px;
+  font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 18px;
-  margin-bottom: 6px;
+  border: none;
+  background: linear-gradient(90deg, #9333ea 0%, #6d28d9 100%);
+  color: #fff;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 8px rgba(80, 0, 80, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  transition: background 0.2s;
+  gap: 10px;
+  transition:
+    background 0.2s,
+    opacity 0.2s;
+  &:hover {
+    opacity: 0.93;
+  }
 }
-.login-btn:hover {
-  background: linear-gradient(90deg, #6c63ff 0%, #a445b2 100%);
+.login-form__button-icon {
+  display: flex;
+  align-items: center;
 }
-.signup-row {
-  margin-top: 18px;
+.login-form__signup-row {
   text-align: center;
-  color: #8a8a8a;
-  font-size: 0.98rem;
+  font-size: 1.05rem;
+  color: #22223b;
+  margin-top: 1.5rem;
 }
-.signup-link {
-  color: #a445b2;
+.login-form__signup-link {
+  color: #9333ea;
   font-weight: 600;
-  text-decoration: none;
+  text-decoration: underline;
+  margin-left: 0.2em;
 }
-.signup-link:hover {
-  color: #6c63ff;
-}
-.login-footer {
-  margin-top: 32px;
-  color: #8a8a8a;
-  font-size: 1rem;
+.login-contact {
   text-align: center;
-}
-// Icon styles (replace with SVGs or font icons as needed)
-.icon-user::before {
-  content: '\f007';
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  margin-right: 6px;
-}
-.icon-lock::before {
-  content: '\f023';
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  margin-right: 6px;
-}
-.icon-eye::before {
-  content: '\f06e';
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-}
-.icon-info::before {
-  content: '\f05a';
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-}
-.icon-login::before {
-  content: '\f2f6';
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-}
-@media (max-width: 600px) {
-  .login-form-card {
-    max-width: 98vw;
-    padding: 24px 8vw 18px 8vw;
-  }
-  .login-header {
-    margin-top: 8vw;
-  }
-}
-@media (max-width: 768px) {
-  .login-container {
-    flex-direction: column;
-    padding: 1.5rem 0.5rem;
-    .login-illustration {
-      width: 100%;
-      margin-bottom: 1.5rem;
-    }
-    .login-form {
-      width: 100%;
-      max-width: 100%;
-      padding: 1.5rem 1rem;
-    }
-  }
-}
-@media (max-width: 480px) {
-  .login-container {
-    padding: 1rem 0.25rem;
-    .login-form {
-      padding: 1rem 0.5rem;
-      font-size: 0.98rem;
-      input,
-      button {
-        font-size: 0.98rem;
-        padding: 0.5rem 0.75rem;
-      }
-    }
-    .login-illustration {
-      display: none;
-    }
-  }
+  color: #8a8a8a;
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
 }
 </style>
