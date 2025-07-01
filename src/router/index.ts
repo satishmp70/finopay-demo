@@ -11,7 +11,7 @@ import ForgotPasswordPage from '@/pages/ForgotPasswordPage.vue'
 // Lazy-loaded views
 const AdminDashboard = () => import('@/pages/admin/AdminDashboard.vue')
 const AdminUsers = () => import('@/pages/admin/UsersPage.vue')
-const AdminReports = () => import('@/pages/admin/ReportsPage.vue')
+const AdminReports = () => import('@/pages/admin/TransactionsPage.vue')
 const AdminAnalytics = () => import('@/pages/admin/AnalyticsPage.vue')
 const AdminPayments = () => import('@/pages/admin/PaymentsPage.vue')
 
@@ -34,9 +34,9 @@ const routes = [
       { path: 'reports', component: AdminReports, meta: { title: 'Reports' } },
       { path: 'analytics', component: AdminAnalytics, meta: { title: 'Analytics' } },
       {
-        path: 'payments',
-        component: AdminPayments,
-        meta: { requiresAuth: true, role: 'admin', title: 'Payments' },
+        path: 'transactions',
+        component: () => import('@/pages/admin/TransactionsPage.vue'),
+        meta: { requiresAuth: true, role: 'admin', title: 'Transactions' },
       },
     ],
   },

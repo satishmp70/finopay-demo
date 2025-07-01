@@ -1,21 +1,190 @@
 <template>
-  <section class="payment-section">
-    <!-- Header -->
-    <div class="payment-header">
+  <section class="transactions-section">
+    <!-- Dashboard Header -->
+    <div class="transactions-header">
       <div>
-        <h1 class="payment-title">Payments (Admin)</h1>
-        <p class="payment-desc">Manage, send, and review all payments as an admin</p>
+        <h1 class="transactions-title">Transactions</h1>
+        <p class="transactions-desc">Track and manage all your payment transactions</p>
       </div>
-      <div class="payment-header-actions">
-        <button class="payment-btn primary" @click="showSendMoney = true">Send Money</button>
-        <button class="payment-btn outline" @click="showRequest = true">Request Payment</button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="transactions-stats-grid">
+      <div class="stat-card balance">
+        <div>
+          <p class="stat-label">Total Balance</p>
+          <p class="stat-value">₹1,24,580</p>
+          <p class="stat-meta positive">+12.5% from last month</p>
+        </div>
+        <div class="stat-icon blue">
+          <svg viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card income">
+        <div>
+          <p class="stat-label">Monthly Income</p>
+          <p class="stat-value">₹45,230</p>
+          <p class="stat-meta positive">+8.2% from last month</p>
+        </div>
+        <div class="stat-icon green">
+          <svg viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M7 11l5-5m0 0l5 5m-5-5v12"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card expense">
+        <div>
+          <p class="stat-label">Monthly Expenses</p>
+          <p class="stat-value">₹28,450</p>
+          <p class="stat-meta negative">+3.1% from last month</p>
+        </div>
+        <div class="stat-icon red">
+          <svg viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 13l-5 5m0 0l-5-5m5 5V6"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="stat-card pending">
+        <div>
+          <p class="stat-label">Pending</p>
+          <p class="stat-value">12</p>
+          <p class="stat-meta warning">3 require attention</p>
+        </div>
+        <div class="stat-icon yellow">
+          <svg viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="transactions-charts-grid">
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>Revenue Overview</h3>
+          <select class="chart-select">
+            <option>Last 7 days</option>
+            <option>Last 30 days</option>
+            <option>Last 3 months</option>
+          </select>
+        </div>
+        <div class="chart-canvas"><canvas id="revenueChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>Expense Categories</h3>
+          <button class="chart-link">View All</button>
+        </div>
+        <div class="chart-canvas"><canvas id="categoryChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Recent Transactions Table -->
+    <div class="transactions-table-card">
+      <div class="table-header">
+        <h3>Recent Transactions</h3>
+        <button class="table-link">View All</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Transaction</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="tx in transactions" :key="tx.id">
+              <td>
+                <div class="desc-flex">
+                  <div :class="['desc-icon', tx.iconClass]">
+                    <svg v-if="tx.iconClass.includes('green')" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M7 11l5-5m0 0l5 5m-5-5v12"
+                      />
+                    </svg>
+                    <svg v-else-if="tx.iconClass.includes('red')" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 13l-5 5m0 0l-5-5m5 5V6"
+                      />
+                    </svg>
+                    <svg v-else-if="tx.iconClass.includes('yellow')" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <svg v-else viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a2 2 0 00-3 3v8a2 2 0 003 3z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="desc-title">{{ tx.title }}</p>
+                    <p class="desc-meta">{{ tx.description }}</p>
+                  </div>
+                </div>
+              </td>
+              <td>{{ tx.date }}</td>
+              <td :class="tx.amount > 0 ? 'credit' : 'debit'">
+                {{ tx.amount > 0 ? '+' : '' }}₹{{
+                  Math.abs(tx.amount).toLocaleString(undefined, { minimumFractionDigits: 2 })
+                }}
+              </td>
+              <td>
+                <span :class="['status-badge', tx.status.toLowerCase()]">{{ tx.status }}</span>
+              </td>
+              <td>
+                <button class="table-action" @click="viewTransaction(tx)">View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
     <!-- Quick Actions -->
-    <div class="payment-quick-grid">
-      <div class="quick-card send" @click="showSendMoney = true">
-        <div class="quick-icon blue">
+    <div class="transactions-actions-grid">
+      <div class="action-card send">
+        <div class="action-icon blue">
           <svg viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
@@ -26,12 +195,12 @@
           </svg>
         </div>
         <div>
-          <h3 class="quick-title">Send Money</h3>
-          <p class="quick-desc">Transfer funds to users or vendors</p>
+          <h4 class="action-title">Send Money</h4>
+          <p class="action-desc">Transfer funds instantly</p>
         </div>
       </div>
-      <div class="quick-card request" @click="showRequest = true">
-        <div class="quick-icon green">
+      <div class="action-card request">
+        <div class="action-icon green">
           <svg viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
@@ -42,12 +211,12 @@
           </svg>
         </div>
         <div>
-          <h3 class="quick-title">Request Payment</h3>
-          <p class="quick-desc">Request funds from users or partners</p>
+          <h4 class="action-title">Request Payment</h4>
+          <p class="action-desc">Request funds from users or partners</p>
         </div>
       </div>
-      <div class="quick-card bills" @click="showPayBills = true">
-        <div class="quick-icon purple">
+      <div class="action-card bills">
+        <div class="action-icon purple">
           <svg viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
@@ -58,226 +227,53 @@
           </svg>
         </div>
         <div>
-          <h3 class="quick-title">Pay Bills</h3>
-          <p class="quick-desc">Settle company utilities & subscriptions</p>
+          <h4 class="action-title">Pay Bills</h4>
+          <p class="action-desc">Settle company utilities & subscriptions</p>
         </div>
       </div>
     </div>
-
-    <!-- Main Grid -->
-    <div class="payment-main-grid">
-      <!-- Recent Payments -->
-      <div class="payment-card recent-payments">
-        <div class="card-header">
-          <h3>Recent Payments</h3>
-          <button class="card-link">View All</button>
-        </div>
-        <div class="recent-list">
-          <div v-for="p in recentPayments" :key="p.id" class="recent-item">
-            <div class="recent-left">
-              <img v-if="p.avatar" :src="p.avatar" class="recent-avatar" />
-              <div
-                v-else-if="p.fallback && p.fallbackClass"
-                class="recent-avatar fallback"
-                :class="p.fallbackClass"
-              >
-                {{ p.fallback }}
-              </div>
-              <div>
-                <p class="recent-name">{{ p.name }}</p>
-                <p class="recent-desc">{{ p.desc }}</p>
-              </div>
-            </div>
-            <div class="recent-right">
-              <p :class="p.amount > 0 ? 'recent-amount green' : 'recent-amount red'">
-                {{ p.amount > 0 ? '+' : '' }}₹{{ Math.abs(p.amount).toLocaleString() }}
-              </p>
-              <p class="recent-time">{{ p.time }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Payment Methods -->
-      <div class="payment-card payment-methods">
-        <div class="card-header">
-          <h3>Payment Methods</h3>
-          <button class="card-link" @click="showAddPayment = true">Add New</button>
-        </div>
-        <div class="methods-list">
-          <div v-for="m in paymentMethods" :key="m.id" class="method-item">
-            <div class="method-left">
-              <div class="method-icon" :class="m.bgClass">{{ m.type }}</div>
-              <div>
-                <p class="method-title">{{ m.label }}</p>
-                <p class="method-desc">{{ m.desc }}</p>
-              </div>
-            </div>
-            <div class="method-right">
-              <span v-if="m.primary" class="method-badge">Primary</span>
-              <button class="method-action">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <button class="method-add" @click="showAddPayment = true">
-            <svg viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-            <span>Add Payment Method</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pending Requests -->
-    <div class="payment-card pending-requests">
-      <div class="card-header">
-        <h3>Pending Requests</h3>
-        <span class="pending-badge">{{ pendingRequests.length }} pending</span>
-      </div>
-      <div class="pending-list">
-        <div v-for="r in pendingRequests" :key="r.id" class="pending-item">
-          <div class="pending-left">
-            <img v-if="r.avatar" :src="r.avatar" class="pending-avatar" />
-            <div
-              v-else-if="r.fallback && r.fallbackClass"
-              class="pending-avatar fallback"
-              :class="r.fallbackClass"
-            >
-              {{ r.fallback }}
-            </div>
-            <div>
-              <p class="pending-name">{{ r.name }}</p>
-              <p class="pending-desc">{{ r.desc }}</p>
-              <p class="pending-time">{{ r.time }}</p>
-            </div>
-          </div>
-          <div class="pending-right">
-            <span class="pending-amount">₹{{ r.amount }}</span>
-            <div class="pending-actions">
-              <button class="pending-pay">Pay</button>
-              <button class="pending-decline">Decline</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modals -->
-    <SendMoneyModal v-if="showSendMoney" @close="showSendMoney = false" />
-    <RequestPaymentModal v-if="showRequest" @close="showRequest = false" />
-    <PayBillsModal v-if="showPayBills" @close="showPayBills = false" />
-    <AddPaymentMethodModal v-if="showAddPayment" @close="showAddPayment = false" />
   </section>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import SendMoneyModal from '../user/SendMoneyModal.vue'
-import RequestPaymentModal from '../user/RequestPaymentModal.vue'
-import PayBillsModal from '../user/PayBillsModal.vue'
-import AddPaymentMethodModal from '../user/AddPaymentMethodModal.vue'
 
-const showSendMoney = ref(false)
-const showRequest = ref(false)
-const showPayBills = ref(false)
-const showAddPayment = ref(false)
-
-const recentPayments: Array<{
-  id: number
-  name: string
-  desc: string
-  amount: number
-  time: string
-  avatar?: string
-  fallback?: string
-  fallbackClass?: string
-}> = [
+const transactions = ref([
   {
     id: 1,
-    name: 'Vendor Payout',
-    desc: 'Monthly vendor payment',
-    amount: -25000,
-    time: '1 hour ago',
-    fallback: 'VP',
-    fallbackClass: 'blue',
+    title: 'Payment Received',
+    description: 'From John Doe',
+    date: '2024-06-01',
+    amount: 5000,
+    status: 'Completed',
+    iconClass: 'green',
   },
   {
     id: 2,
-    name: 'User Refund',
-    desc: 'Refund to user #1234',
-    amount: -1200,
-    time: 'Today',
-    fallback: 'UR',
-    fallbackClass: 'green',
+    title: 'Payment Sent',
+    description: 'To Jane Smith',
+    date: '2024-06-02',
+    amount: -2000,
+    status: 'Pending',
+    iconClass: 'yellow',
   },
   {
     id: 3,
-    name: 'Corporate Bill',
-    desc: 'Internet subscription',
-    amount: -4500,
-    time: 'Yesterday',
-    fallback: 'CB',
-    fallbackClass: 'purple',
+    title: 'Refund Processed',
+    description: 'To John Doe',
+    date: '2024-06-03',
+    amount: -1500,
+    status: 'Failed',
+    iconClass: 'red',
   },
-  {
-    id: 4,
-    name: 'Received Payment',
-    desc: 'From partner org',
-    amount: 50000,
-    time: '2 days ago',
-    avatar: 'https://avatar.iran.liara.run/public/45',
-    fallback: 'RP',
-    fallbackClass: 'blue',
-  },
-]
-const paymentMethods = [
-  {
-    id: 1,
-    type: 'BANK',
-    label: 'ICICI Bank ••••1234',
-    desc: 'Corporate Account',
-    bgClass: 'bank',
-    primary: true,
-  },
-  { id: 2, type: 'VISA', label: '•••• •••• •••• 5678', desc: 'Admin Card', bgClass: 'visa' },
-  { id: 3, type: 'UPI', label: 'admin@slenpay', desc: 'UPI Handle', bgClass: 'upi' },
-]
-const pendingRequests = [
-  {
-    id: 1,
-    name: 'John Doe',
-    desc: 'Expense reimbursement',
-    amount: 3200,
-    time: '3 hours ago',
-    avatar: 'https://avatar.iran.liara.run/public/12',
-    fallback: 'JD',
-    fallbackClass: 'blue',
-  },
-  {
-    id: 2,
-    name: 'Vendor X',
-    desc: 'Invoice #567',
-    amount: 15000,
-    time: 'Yesterday',
-    fallback: 'VX',
-    fallbackClass: 'green',
-  },
-]
+])
+
+function viewTransaction(tx: any) {
+  // Implement view logic
+  alert(`Viewing transaction: ${tx.title}`)
+}
 </script>
 
 <style scoped lang="scss">
-@import '../user/PaymentPage.vue';
+// ... existing code ...
 </style>
