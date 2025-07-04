@@ -134,15 +134,17 @@ function onLogin() {
 <style scoped lang="scss">
 :global(html),
 :global(body) {
-  overflow: hidden !important;
+  /* Remove overflow: hidden to allow vertical scrolling */
+  // overflow: hidden !important;
   height: 100vh;
 }
 .login-page {
   min-height: 100vh;
   height: 100vh;
-  overflow: hidden;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  /* Remove overflow: hidden and overflow-y: hidden to allow vertical scrolling */
+  // overflow: hidden;
+  // overflow-y: hidden;
+  // overflow-x: hidden;
   background: #fcfaff;
   display: flex;
   flex-direction: column;

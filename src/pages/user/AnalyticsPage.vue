@@ -381,7 +381,12 @@ onMounted(() => {
             beginAtZero: true,
             grid: { color: 'rgba(0, 0, 0, 0.1)' },
             ticks: {
-              callback: (value: number) => '₹' + value / 1000 + 'K',
+              callback(this: any, tickValue: string | number) {
+                if (typeof tickValue === 'number') {
+                  return '₹' + tickValue / 1000 + 'K'
+                }
+                return tickValue
+              },
             },
           },
           x: { grid: { display: false } },

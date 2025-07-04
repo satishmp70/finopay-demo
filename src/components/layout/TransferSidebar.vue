@@ -103,13 +103,28 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
-const props = defineProps({
-  quickContacts: Array,
-  recentTransfers: Array,
-})
+const props = defineProps<{
+  quickContacts: Array<{
+    mobile: string
+    bgClass: string
+    textClass: string
+    initials: string
+    name: string
+  }>
+  recentTransfers: Array<{
+    id: number | string
+    name: string
+    time: string
+    amount: number
+    status: string
+    statusClass: string
+    iconBg: string
+    iconColor: string
+  }>
+}>()
 const emit = defineEmits(['quick-transfer'])
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/base.scss';
+@use '@/assets/base.scss' as *;
 </style>

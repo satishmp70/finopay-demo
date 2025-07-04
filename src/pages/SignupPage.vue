@@ -180,7 +180,6 @@ body {
 }
 .signup-section {
   height: 100vh;
-  overflow: hidden;
   background: #fff;
   display: flex;
   align-items: stretch;
@@ -192,14 +191,12 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     height: 100vh;
-    @include lg {
-      grid-template-columns: 3fr 2fr;
-    }
     align-items: center;
     width: 100vw;
     max-width: 100vw;
-    background: #fff;
-    box-sizing: border-box;
+    @include lg {
+      grid-template-columns: 3fr 2fr;
+    }
   }
   &__info-card {
     position: relative;
@@ -214,7 +211,6 @@ body {
     padding: 2rem;
     box-sizing: border-box;
     min-width: 0;
-    overflow: hidden;
     z-index: 1;
     &::before {
       content: '';
@@ -305,7 +301,6 @@ body {
     max-height: 85vh;
     box-sizing: border-box;
     min-width: 0;
-    overflow: hidden;
   }
   &__form-title {
     color: #22223b;

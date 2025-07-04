@@ -43,7 +43,8 @@ onMounted(() => {
   display: flex;
   position: relative;
   height: 100vh;
-  overflow: hidden;
+  /* Remove overflow: hidden to allow vertical scrolling */
+  // overflow: hidden;
 
   .main {
     flex: 1;
@@ -52,6 +53,7 @@ onMounted(() => {
     margin-left: 240px; /* Width of the sidebar */
     transition: margin-left 0.3s ease;
     overflow-y: auto;
+    padding-top: 60px; /* Prevent content from being hidden under fixed navbar */
   }
 
   &.sidebar-collapsed .main {
@@ -68,7 +70,8 @@ onMounted(() => {
     left: 0;
     top: 0;
     height: 100vh;
-    overflow: hidden;
+    /* Remove overflow: hidden to allow vertical scrolling if needed */
+    // overflow: hidden;
     z-index: 50;
     transition: width 0.3s ease;
   }
@@ -91,6 +94,25 @@ onMounted(() => {
     &.sidebar-open .sidebar {
       transform: translateX(0);
     }
+  }
+}
+
+/* Fix for .the-navbar overlap with sidebar */
+.the-navbar {
+  margin-left: 240px;
+  width: calc(100vw - 240px);
+  transition:
+    margin-left 0.3s,
+    width 0.3s;
+}
+.layout.sidebar-collapsed .the-navbar {
+  margin-left: 70px;
+  width: calc(100vw - 70px);
+}
+@media (max-width: 768px) {
+  .the-navbar {
+    margin-left: 0;
+    width: 100vw;
   }
 }
 </style>

@@ -276,99 +276,51 @@
             <div class="contact__card-title">Get in Touch</div>
             <div class="contact__info-list">
               <div class="contact__info-item">
-                <span class="contact__info-icon contact__info-icon--circle"
-                  ><svg width="20" height="20" fill="none">
-                    <circle cx="10" cy="10" r="10" fill="url(#phone-gradient)" />
-                    <text
-                      x="50%"
-                      y="55%"
-                      text-anchor="middle"
-                      alignment-baseline="middle"
-                      font-size="13"
-                      fill="#fff"
-                    >
-                      📞
-                    </text>
-                    <defs>
-                      <linearGradient
-                        id="phone-gradient"
-                        x1="0"
-                        y1="0"
-                        x2="20"
-                        y2="20"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#9333ea" />
-                        <stop offset="1" stop-color="#ec4899" />
-                      </linearGradient>
-                    </defs></svg
-                ></span>
+                <span class="contact__info-icon contact__info-icon--circle">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.13 1.13.37 2.23.72 3.28a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c1.05.35 2.15.59 3.28.72A2 2 0 0 1 22 16.92z"
+                      stroke="#fff"
+                      stroke-width="2"
+                    />
+                  </svg>
+                </span>
                 <div>
                   <div class="contact__info-label">Phone</div>
                   <div class="contact__info-value">+91 98765 43210</div>
                 </div>
               </div>
               <div class="contact__info-item">
-                <span class="contact__info-icon contact__info-icon--circle"
-                  ><svg width="20" height="20" fill="none">
-                    <circle cx="10" cy="10" r="10" fill="url(#email-gradient)" />
-                    <text
-                      x="50%"
-                      y="55%"
-                      text-anchor="middle"
-                      alignment-baseline="middle"
-                      font-size="13"
-                      fill="#fff"
-                    >
-                      ✉️
-                    </text>
-                    <defs>
-                      <linearGradient
-                        id="email-gradient"
-                        x1="0"
-                        y1="0"
-                        x2="20"
-                        y2="20"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#9333ea" />
-                        <stop offset="1" stop-color="#ec4899" />
-                      </linearGradient>
-                    </defs></svg
-                ></span>
+                <span class="contact__info-icon contact__info-icon--circle">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+                    <rect
+                      width="20"
+                      height="14"
+                      x="2"
+                      y="5"
+                      rx="2"
+                      stroke="#fff"
+                      stroke-width="2"
+                    />
+                    <path d="M22 7l-10 6L2 7" stroke="#fff" stroke-width="2" />
+                  </svg>
+                </span>
                 <div>
                   <div class="contact__info-label">Email</div>
                   <div class="contact__info-value">support@finopay.com</div>
                 </div>
               </div>
               <div class="contact__info-item">
-                <span class="contact__info-icon contact__info-icon--circle"
-                  ><svg width="20" height="20" fill="none">
-                    <circle cx="10" cy="10" r="10" fill="url(#address-gradient)" />
-                    <text
-                      x="50%"
-                      y="55%"
-                      text-anchor="middle"
-                      alignment-baseline="middle"
-                      font-size="13"
-                      fill="#fff"
-                    >
-                      📍
-                    </text>
-                    <defs>
-                      <linearGradient
-                        id="address-gradient"
-                        x1="0"
-                        y1="0"
-                        x2="20"
-                        y2="20"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#9333ea" />
-                        <stop offset="1" stop-color="#ec4899" />
-                      </linearGradient>
-                    </defs></svg
-                ></span>
+                <span class="contact__info-icon contact__info-icon--circle">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21s-6-5.686-6-10A6 6 0 0 1 18 11c0 4.314-6 10-6 10z"
+                      stroke="#fff"
+                      stroke-width="2"
+                    />
+                    <circle cx="12" cy="11" r="2" stroke="#fff" stroke-width="2" />
+                  </svg>
+                </span>
                 <div>
                   <div class="contact__info-label">Address</div>
                   <div class="contact__info-value">123 Business Center, Mumbai, India</div>
@@ -449,11 +401,32 @@
         <div class="footer__copyright">© 2025 Finopay. All rights reserved.</div>
       </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button
+      v-show="showScrollTop"
+      class="scroll-to-top"
+      @click="scrollToTop"
+      aria-label="Scroll to top"
+    >
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 15l-6-6-6 6" />
+      </svg>
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const showMobileMenu = ref(false)
 function toggleMobileMenu() {
@@ -479,9 +452,56 @@ const handleContactSubmit = () => {
   }
   alert("Thank you for your message! We'll get back to you soon.")
 }
+
+const showScrollTop = ref(false)
+function handleScroll() {
+  showScrollTop.value = window.scrollY > 120
+}
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
+.home {
+  min-height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  padding-top: 80px;
+  width: 100%;
+  // Custom beautiful vertical scrollbar
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: #f3e8ff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #9333ea 0%, #ec4899 100%);
+    border-radius: 8px;
+    min-height: 40px;
+    box-shadow: 0 2px 8px rgba(147, 51, 234, 0.08);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c3aed 0%, #db2777 100%);
+  }
+  &::-webkit-scrollbar-track {
+    background: #f3e8ff;
+    border-radius: 8px;
+  }
+  scrollbar-width: thin;
+  scrollbar-color: #9333ea #f3e8ff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 // Variables
 $primary-gradient: linear-gradient(to right, #9333ea, #ec4899);
 $secondary-gradient: linear-gradient(to bottom right, #f3e8ff, #fdf2f8);
@@ -551,18 +571,20 @@ $yellow-400: #fbbf24;
     'Helvetica Neue', sans-serif;
   color: $gray-900;
   background: $white;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
 }
 
 // Header
 .header {
-  background: $white;
-  box-shadow:
-    0 1px 3px 0 rgba(0, 0, 0, 0.1),
-    0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: $white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 
   &__container {
     @include container;
@@ -683,8 +705,8 @@ $yellow-400: #fbbf24;
 
 // Hero Section
 .hero {
+  padding-top: 80px;
   background: linear-gradient(90deg, #f3e8ff 0%, #fdf2f8 100%);
-  padding-top: 4.5rem;
   padding-bottom: 4.5rem;
 
   &--modern {
@@ -701,13 +723,13 @@ $yellow-400: #fbbf24;
     gap: 3rem;
     align-items: center;
     justify-content: center;
+    min-height: 400px;
     @include responsive(lg) {
       flex-direction: row;
       gap: 0;
       align-items: center;
       justify-content: space-between;
     }
-    min-height: 400px;
   }
 
   &__left {
@@ -867,6 +889,7 @@ $yellow-400: #fbbf24;
 
 // About Section
 .about {
+  padding-top: 80px;
   background: $white;
   @include section-padding;
 
@@ -889,14 +912,14 @@ $yellow-400: #fbbf24;
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
     @include responsive(md) {
       flex-direction: row;
       align-items: flex-start;
       justify-content: center;
       gap: 6rem;
     }
-    max-width: 1200px;
-    margin: 0 auto;
   }
 
   &__left {
@@ -915,10 +938,10 @@ $yellow-400: #fbbf24;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    margin-top: 0.5rem;
     @include responsive(md) {
       align-items: flex-start;
     }
-    margin-top: 0.5rem;
   }
 
   &__title {
@@ -1005,6 +1028,7 @@ $yellow-400: #fbbf24;
 
 // Services Section
 .services {
+  padding-top: 80px;
   background: $gray-50;
   @include section-padding;
 
@@ -1114,6 +1138,7 @@ $yellow-400: #fbbf24;
 
 // Features Section
 .features {
+  padding-top: 80px;
   background: $white;
   @include section-padding;
 
@@ -1151,13 +1176,13 @@ $yellow-400: #fbbf24;
     display: grid;
     gap: 2rem;
     grid-template-columns: 1fr;
+    margin-top: 2.5rem;
     @include responsive(md) {
       grid-template-columns: repeat(2, 1fr);
     }
     @include responsive(lg) {
       grid-template-columns: repeat(4, 1fr);
     }
-    margin-top: 2.5rem;
   }
 
   &__card-why {
@@ -1220,6 +1245,7 @@ $yellow-400: #fbbf24;
 
 // Contact Section
 .contact {
+  padding-top: 80px;
   background: $gray-50;
   @include section-padding;
 
@@ -1228,54 +1254,34 @@ $yellow-400: #fbbf24;
   }
 
   &__container--cards {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
   }
 
-  &__title {
-    font-size: 1.875rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 0.5rem;
-  }
-
-  &__divider {
-    width: 6rem;
-    height: 0.25rem;
-    background: $primary-gradient;
-    margin: 0 auto 2rem auto;
-  }
-
+  &__title,
   &__subtitle {
-    font-size: 1.15rem;
-    color: $gray-600;
-    margin-bottom: 2.5rem;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   &__cards {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 2rem;
-    @include responsive(md) {
-      flex-direction: row;
-      gap: 2.5rem;
-      align-items: flex-start;
-      justify-content: center;
-    }
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
   }
 
   &__card {
-    background: $white;
-    border-radius: 0.75rem;
-    box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.07);
-    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 0;
     flex: 1 1 0;
     max-width: 420px;
-    margin: 0 auto;
+    min-width: 300px;
   }
 
   &__card-title {
@@ -1497,6 +1503,42 @@ $yellow-400: #fbbf24;
 
   .header__mobile-btn {
     display: none;
+  }
+}
+
+.scroll-to-top {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  background: $primary-gradient;
+  color: $white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  opacity: 0.85;
+  z-index: 2000;
+  &:hover {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.08);
+  }
+}
+
+.scroll-demo-section {
+  padding: 4rem 0;
+  background: #f9fafb;
+  .scroll-demo-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
   }
 }
 </style>

@@ -289,11 +289,9 @@ onMounted(() => {
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
     margin-bottom: 2rem;
-
     @media (min-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
     }
-
     @media (min-width: 1024px) {
       grid-template-columns: repeat(4, 1fr);
     }
@@ -472,14 +470,14 @@ onMounted(() => {
   }
 
   .recent-tx {
-    grid-column: span 1 / span 1;
-    @media (min-width: 1024px) {
-      grid-column: span 2 / span 2;
-    }
     background-color: white;
     border-radius: 0.5rem;
     border: 1px solid rgba(229, 231, 235, 0.3);
     padding: 1.5rem;
+    grid-column: span 1 / span 1;
+    @media (min-width: 1024px) {
+      grid-column: span 2 / span 2;
+    }
 
     &__header {
       display: flex;

@@ -101,16 +101,13 @@ const gotoProfile = () => {
 
 <style scoped lang="scss">
 .the-navbar {
-  width: 100%;
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  width: 100vw;
+  z-index: 2000;
   background: #fff;
-  border-bottom: 1px solid #e5e7eb;
-  box-shadow: none;
-  display: block;
-  transition: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .navbar {

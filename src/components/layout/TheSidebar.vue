@@ -15,7 +15,7 @@
             :class="{ active: $route.path === link.path }"
             :title="link.label"
           >
-            <component :is="(icons as any)[link.icon]" size="18" />
+            <component :is="iconMap[link.icon]" size="18" />
             <span v-if="!collapsed">{{ link.label }}</span>
           </RouterLink>
         </nav>
@@ -53,6 +53,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { navLinks } from '@/constants/navLinks'
 import * as icons from 'lucide-vue-next'
+import type { Component } from 'vue'
 
 const props = defineProps<{ collapsed: boolean; role: 'admin' | 'user' }>()
 const links = computed(() => (props.role === 'admin' ? navLinks.admin : navLinks.user))
@@ -62,6 +63,8 @@ const router = useRouter()
 const user = useUserStore()
 const dropdownPosition = ref('bottom')
 const userProfileRef = ref<HTMLElement | null>(null)
+
+const iconMap = icons as unknown as Record<string, Component>
 
 const handleResize = () => {
   visible.value = window.innerWidth > 768

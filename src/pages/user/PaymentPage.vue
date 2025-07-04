@@ -148,7 +148,7 @@
         <span class="pending-badge">{{ pendingRequests.length }} pending</span>
       </div>
       <div class="pending-list">
-        <div v-for="r in pendingRequests" :key="r.id" class="pending-item">
+        <div v-for="r in pendingRequestsWithFallback" :key="r.id" class="pending-item">
           <div class="pending-left">
             <img v-if="r.avatar" :src="r.avatar" class="pending-avatar" />
             <div v-else class="pending-avatar fallback" :class="r.fallbackClass">
@@ -180,7 +180,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import SendMoneyModal from './SendMoneyModal.vue'
 import RequestPaymentModal from './RequestPaymentModal.vue'
 import PayBillsModal from './PayBillsModal.vue'
@@ -261,6 +261,8 @@ const pendingRequests = [
     amount: 800,
     time: '2 days ago',
     avatar: 'https://avatar.iran.liara.run/public/67',
+    fallback: undefined,
+    fallbackClass: '',
   },
   {
     id: 2,
@@ -269,6 +271,8 @@ const pendingRequests = [
     amount: 450,
     time: '1 day ago',
     avatar: 'https://avatar.iran.liara.run/public/89',
+    fallback: undefined,
+    fallbackClass: '',
   },
   {
     id: 3,
@@ -277,8 +281,28 @@ const pendingRequests = [
     amount: 320,
     time: '3 hours ago',
     avatar: 'https://avatar.iran.liara.run/public/34',
+    fallback: undefined,
+    fallbackClass: '',
   },
 ]
+
+const pendingRequestsWithFallback = computed(() =>
+  pendingRequests.map((r) => {
+    if (r.avatar) return r
+    // fallback: initials from name
+    const initials = r.name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase()
+    // fallbackClass: pick a color based on hash of name
+    const colors = ['blue', 'green', 'purple', 'orange', 'red']
+    let hash = 0
+    for (let i = 0; i < r.name.length; i++) hash += r.name.charCodeAt(i)
+    const fallbackClass = colors[hash % colors.length]
+    return { ...r, fallback: initials, fallbackClass }
+  }),
+)
 </script>
 
 <style scoped lang="scss">

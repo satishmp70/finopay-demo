@@ -333,13 +333,25 @@
 import { ref, onMounted } from 'vue'
 import Chart from 'chart.js/auto'
 
+interface Transaction {
+  id: string
+  icon: string
+  iconClass: string
+  title: string
+  description: string
+  date: string
+  time: string
+  amount: number
+  status: string
+}
+
 const search = ref('')
 const status = ref('All Status')
 const type = ref('All Types')
 const dateRange = ref('Last 30 days')
 const showTransactionModal = ref(false)
 const showDetailModal = ref(false)
-const selectedTransaction = ref<any>(null)
+const selectedTransaction = ref<Transaction | null>(null)
 
 function openTransactionModal() {
   showTransactionModal.value = true
@@ -347,7 +359,7 @@ function openTransactionModal() {
 function closeTransactionModal() {
   showTransactionModal.value = false
 }
-function viewTransaction(tx: any) {
+function viewTransaction(tx: Transaction) {
   selectedTransaction.value = tx
   showDetailModal.value = true
 }
@@ -462,7 +474,12 @@ onMounted(() => {
             beginAtZero: true,
             grid: { color: 'rgba(0, 0, 0, 0.1)' },
             ticks: {
-              callback: (value: number) => '₹' + value / 1000 + 'K',
+              callback(this: any, tickValue: string | number) {
+                if (typeof tickValue === 'number') {
+                  return '₹' + tickValue / 1000 + 'K'
+                }
+                return tickValue
+              },
             },
           },
           x: { grid: { display: false } },

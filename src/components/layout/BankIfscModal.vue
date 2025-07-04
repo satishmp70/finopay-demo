@@ -49,17 +49,17 @@
 
 <script setup lang="ts">
 import { computed, defineProps, defineEmits } from 'vue'
-const props = defineProps({
-  show: Boolean,
-  search: String,
-  banks: Array,
-})
+const props = defineProps<{
+  show: boolean
+  search: string
+  banks: Array<{ ifsc: string; name: string; branch: string }>
+}>()
 const emit = defineEmits(['close', 'select', 'update:search'])
 const filteredBanks = computed(() => {
   if (!props.search) return props.banks
   const search = props.search.toLowerCase()
   return props.banks.filter(
-    (bank: any) =>
+    (bank) =>
       bank.name.toLowerCase().includes(search) ||
       bank.ifsc.toLowerCase().includes(search) ||
       bank.branch.toLowerCase().includes(search),
@@ -72,7 +72,7 @@ const searchModel = computed({
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/base.scss';
+@use '@/assets/base.scss' as *;
 
 .bank-modal-backdrop {
   position: fixed;
